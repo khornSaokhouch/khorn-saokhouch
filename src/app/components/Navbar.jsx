@@ -1,4 +1,3 @@
-// src/app/components/Navbar.js
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, LayoutGroup } from 'framer-motion';
@@ -23,7 +22,6 @@ export default function Navbar() {
     }
   };
 
-  // Intersection Observer to track active section while scrolling
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -33,30 +31,19 @@ export default function Navbar() {
           }
         });
       },
-      { 
-        rootMargin: '0px', 
-        threshold: 0.5 
-      }
+      { rootMargin: '0px', threshold: 0.5 }
     );
 
     links.forEach(link => {
       const element = document.getElementById(link.id);
-      if (element) {
-        observer.observe(element);
-      }
+      if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, []);
 
-
   return (
     <LayoutGroup>
-      {/* 
-        NEW WRAPPER: This fixed div spans the full width (left-0 right-0)
-        and uses flex justify-center to guarantee the nav element is centered
-        regardless of internal overflow or screen size.
-      */}
       <div className="fixed top-4 left-0 right-0 z-50 flex justify-center px-2 md:px-0">
         <motion.nav
           initial={{ y: -50, opacity: 0 }}
@@ -64,13 +51,8 @@ export default function Navbar() {
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
           className="
             bg-card/50 border border-accent/20 backdrop-blur-xl 
-            rounded-full p-1 flex gap-1 shadow-2xl 
-            font-mono tracking-wider 
-            
-            /* Responsive safety on the inner element */
-            max-w-full overflow-x-auto 
-            
-            md:p-2 md:gap-2
+            rounded-full p-2 flex gap-2 shadow-2xl 
+            font-mono tracking-wider max-w-full overflow-x-auto
           "
         >
           {links.map((link) => (
@@ -81,13 +63,11 @@ export default function Navbar() {
               onMouseLeave={() => setHovered(null)}
               className={`
                 relative 
-                px-2 py-1 text-xs  /* Compact Mobile */
-                md:px-4 md:py-2 md:text-sm /* Spacious Desktop */
-                rounded-full font-medium transition-colors duration-300 flex-shrink-0
+                px-4 py-2 min-w-[70px] min-h-[40px] text-base sm:text-sm md:text-sm 
+                md:px-4 md:py-2 rounded-full font-medium transition-colors duration-300 flex-shrink-0
                 ${activeId === link.id ? 'text-white' : 'text-gray-400 hover:text-accent'}
               `}
             >
-              {/* Dynamic Hover/Active Indicator (Layout Animation) */}
               {(hovered === link.id || activeId === link.id) && (
                 <motion.span
                   layoutId="activePill"
@@ -103,7 +83,6 @@ export default function Navbar() {
                 />
               )}
               
-              {/* Text Content (sits on top) */}
               <span className="relative z-10 capitalize">{link.label}</span>
             </motion.button>
           ))}

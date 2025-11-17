@@ -52,10 +52,10 @@ export default function ProjectCard({ project, index, transitionDelay = 0 }) {
 
       <div className="absolute inset-0 rounded-3xl border border-white/5 pointer-events-none z-10" />
 
-      <div className="relative z-20 flex flex-col h-full p-4">
+      <div className="relative z-20 flex flex-col h-full p-3 sm:p-4">
         {/* Image */}
         {project.Img && (
-          <div className="relative w-full h-40 md:h-48 mb-4 rounded-2xl overflow-hidden">
+          <div className="relative w-full h-32 sm:h-40 md:h-48 mb-4 rounded-2xl overflow-hidden">
             <Image
               src={project.Img}
               alt={project.Title}
@@ -67,7 +67,10 @@ export default function ProjectCard({ project, index, transitionDelay = 0 }) {
         )}
 
         <h3 className="text-lg md:text-xl font-bold text-accent mb-2">{project.Title}</h3>
-        <p className="text-sm md:text-base text-secondary mb-4 flex-1">{project.Description}</p>
+
+        <p className="text-sm md:text-base text-secondary mb-4 flex-1 line-clamp-4">
+          {project.Description}
+        </p>
 
         {/* TechStack */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -82,7 +85,7 @@ export default function ProjectCard({ project, index, transitionDelay = 0 }) {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 mt-auto">
+        <div className="flex flex-wrap gap-2 mt-auto">
           {project.ProjectLink && (
             <a
               href={project.ProjectLink}
