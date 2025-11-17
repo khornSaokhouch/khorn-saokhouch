@@ -1,0 +1,43 @@
+/* Import Google Fonts FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&display=swap');
+
+/* Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables */
+:root {
+  --color-background: #0A192F;
+  --color-accent: #00b8ff;
+  --color-text: #ccd6f6;
+  --color-card: #112240;
+  --color-text-secondary: #8892b0;
+}
+/* Custom Utilities */
+.canvas-full {
+  @apply fixed inset-0;
+}
+
+.main-wrap {
+  @apply relative w-screen overflow-hidden;
+}
+
+/* Base styles for body */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  @apply bg-background text-white m-0;
+  scroll-behavior: smooth;
+  font-family: 'Battambang', sans-serif; /* Khmer font */
+}
+
+/* Tailwind variable mappings */
+.bg-background { background-color: var(--color-background); }
+.text-accent { color: var(--color-accent); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-card { background-color: var(--color-card); }
+.text-secondary { color: var(--color-text-secondary); }
+
+/* Ensure full height for Next.js root div */
+#__next { height: 100%; }
