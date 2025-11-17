@@ -12,8 +12,7 @@ const links = [
 ];
 
 export default function Navbar() {
-  const { t } = useLanguage(); // <-- Using t from JSON
-
+  const { t } = useLanguage(); 
   const [hovered, setHovered] = useState(null);
   const [activeId, setActiveId] = useState('home');
 
@@ -55,7 +54,7 @@ export default function Navbar() {
           className="
             bg-card/50 border border-accent/20 backdrop-blur-xl 
             rounded-full p-2 flex gap-2 shadow-2xl 
-            font-mono tracking-wider max-w-full overflow-x-auto
+            tracking-wider max-w-full overflow-x-auto
           "
         >
           {links.map((link) => (
@@ -74,21 +73,15 @@ export default function Navbar() {
               {(hovered === link.id || activeId === link.id) && (
                 <motion.span
                   layoutId="activePill"
-                  className={`absolute inset-0 rounded-full z-0 ${
-                    activeId === link.id ? 'bg-accent/80' : 'bg-accent/30'
-                  }`}
+                  className={`absolute inset-0 rounded-full z-0 ${activeId === link.id ? 'bg-accent/80' : 'bg-accent/30'}`}
                   style={{
                     mixBlendMode: 'soft-light',
-                    boxShadow:
-                      activeId === link.id
-                        ? '0 0 8px #00b8ff, 0 0 15px #00b8ff'
-                        : 'none',
+                    boxShadow: activeId === link.id ? '0 0 8px #00b8ff, 0 0 15px #00b8ff' : 'none',
                   }}
                   transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                 />
               )}
 
-              {/* 🔥 Auto translation from JSON */}
               <span className="relative z-10 capitalize">
                 {t[link.id]}
               </span>
