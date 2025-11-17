@@ -35,19 +35,31 @@
   "Node.js / Express": "Node.js / Express",
   "Docker / AWS": "Docker / AWS",
 
-   "projectsHeading": "គម្រោងដែលបង្ហាញ",
+  "projectsHeading": "គម្រោងដែលបង្ហាញ",
 
-   "contactHeading": "ទំនាក់ទំនង",
-   "contactSubtitle": "ខ្ញុំកំពុងស្វែងរកតួនាទីថ្មី និងគម្រោង freelance ផ្សេងៗ។ យើងចាប់ផ្តើមការពិភាក្សាពីគម្រោងឌីជីថលបន្ទាប់របស់អ្នក។",
-   "contactEmailHeading": "ផ្ញើអ៊ីមែលមកខ្ញុំ",
-   "contactLocationHeading": "ទីតាំងរបស់ខ្ញុំ",
-   "contactFormName": "ឈ្មោះរបស់អ្នក",
-   "contactFormEmail": "អ៊ីមែលរបស់អ្នក",
-   "contactFormMessage": "សារ​របស់អ្នក",
-   "contactFormSubmit": "ផ្ញើសារ",
+  "contactHeading": "ទំនាក់ទំនង",
+  "contactSubtitle": "ខ្ញុំកំពុងស្វែងរកតួនាទីថ្មី និងគម្រោង freelance ផ្សេងៗ។ យើងចាប់ផ្តើមការពិភាក្សាពីគម្រោងឌីជីថលបន្ទាប់របស់អ្នក។",
+  "contactEmailHeading": "ផ្ញើអ៊ីមែលមកខ្ញុំ",
+  "contactLocationHeading": "ទីតាំងរបស់ខ្ញុំ",
+  "contactFormName": "ឈ្មោះរបស់អ្នក",
+  "contactFormEmail": "អ៊ីមែលរបស់អ្នក",
+  "contactFormMessage": "សារ​របស់អ្នក",
+  "contactFormSubmit": "ផ្ញើសារ",
 
-     "footerBackToTop": "ទៅខាងលើ",
+  "footerBackToTop": "ទៅខាងលើ",
 
-      "footerCopyright": "រក្សាសិទ្ធិទាំងអស់។",
-  "footerTechInfo": "រចនាឡើងជាមួយ Framer Motion, Next.js និង Three.js។"
+  "footerCopyright": "រក្សាសិទ្ធិទាំងអស់។",
+  "footerTechInfo": "រចនាឡើងជាមួយ Framer Motion, Next.js និង Three.js។",
+
+  "chatBotGreeting": "សួស្តី! ខ្ញុំជាជំនួយការត្បូង AI របស់អ្នក។ ខ្ញុំអាចជួយអ្នកស្វែងរកព័ត៌មានអំពីអ្នកអភិវឌ្ឍន៍ Khorn Saokhouch។",
+  "chatBotDefault": "ខ្ញុំនៅទីនេះដើម្បីជួយអ្នក! សូមសួរអំពីជំនាញ, គម្រោង ឬព័ត៌មានទំនាក់ទំនង។",
+  "chatBotSkills": "Khorn មានជំនាញក្នុង Next.js, Three.js (R3F), Framer Motion, និងស្ថាបត្យកម្ម front-end មានប្រសិទ្ធភាពខ្ពស់។",
+  "chatBotProjects": "អ្នកអាចស្វែងរកគម្រោងដែលគាត់បានបង្ហាញក្នុងផ្នែក 'Projects' ខាងលើ រួមមានបន្ទប់ 3D អន្តរកម្ម!",
+  "chatBotContact": "សំណុំទំនាក់ទំនងស្ថិតនៅចុងទំព័រ ឬអ្នកអាចពិនិត្យតំណភ្ជាប់ 'Contact' នៅ navbar។",
+  "chatBotTitle": "ជំនួយការ AI",
+  "chatBotStatus": "អនឡាញ",
+  "chatBotPlaceholder": "សូមសួរអ្វីមួយ...",
+  "keywordSkills": "ជំនាញ",
+  "keywordProjects": "គម្រោង",
+  "keywordContact": "ទំនាក់ទំនង"
 }

@@ -2,49 +2,66 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext'; // translation context
 
 export default function ChatBot() {
+  const { t, lang } = useLanguage(); // get translations and current language
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, sender: 'bot', text: 'Hello! I am your AI assistant. I can help you find information about the developer, Khorn Saokhouch.' },
+    { id: 1, sender: 'bot', text: t.chatBotGreeting } // use translation
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
 
-  // Scroll to the bottom of the chat when messages update
+  // Scroll to bottom when messages update
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
   }, [messages]);
 
-  const handleSend = () => {
+  const PERSONAL_INFO = `
+  Name: John Doe
+  Skills: React, Next.js, Tailwind, Node.js
+  Projects: Portfolio Website, E-commerce App, Blog Platform
+  Contact: email@example.com, LinkedIn: linkedin.com/in/johndoe
+  `;
+  
+  const handleSend = async () => {
     if (!input.trim()) return;
-
+  
     const userMessage = input.trim();
     setMessages((prev) => [...prev, { id: Date.now(), sender: 'user', text: userMessage }]);
     setInput('');
-
-    // --- Simulated Bot Response Logic ---
-    let botResponse = 'I am here to help you! Ask me about the skills, projects, or contact info.';
-    if (userMessage.toLowerCase().includes('skill')) {
-        botResponse = 'Khorn specializes in Next.js, Three.js (R3F), Framer Motion, and high-performance front-end architecture.';
-    } else if (userMessage.toLowerCase().includes('project')) {
-        botResponse = 'You can find his featured projects in the "Projects" section above, including interactive 3D showrooms!';
-    } else if (userMessage.toLowerCase().includes('contact')) {
-        botResponse = 'The contact form is at the bottom of the page, or you can check the "Contact" link in the navbar.';
-    }
-
-    setTimeout(() => {
+  
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          message: PERSONAL_INFO + '\n\nUser question: ' + userMessage,
+          lang,
+        }),
+      });
+  
+      const data = await response.json();
+      const botResponse = data.reply || "Sorry, I didn't understand that.";
+  
       setMessages((prev) => [
         ...prev,
         { id: Date.now() + 1, sender: 'bot', text: botResponse },
       ]);
-    }, 800);
+    } catch (error) {
+      console.error(error);
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 1, sender: 'bot', text: "Sorry, I didn't understand that." },
+      ]);
+    }
   };
-
+  
+  
   return (
-    // Wrapper to hold the button and the chat window (aligned to the right)
     <div className="relative flex flex-col items-end">
       
       {/* Chat Window */}
@@ -55,18 +72,17 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-            // Position above the toggle button
             className="absolute bottom-full mb-4 w-72 md:w-80 max-w-xs bg-card/95 backdrop-blur-xl 
                        border border-accent/20 rounded-3xl shadow-2xl shadow-black/70 
                        flex flex-col overflow-hidden h-[400px]"
           >
-            {/* Chat Header (Clean Design) */}
+            {/* Header */}
             <div className="bg-accent/10 px-4 py-3 text-white font-bold border-b border-accent/30 flex justify-between items-center">
-              <span className='text-accent'>AI Assistant</span>
-              <span className='text-sm text-secondary'>Online</span>
+              <span className='text-accent'>{t.chatBotTitle}</span>
+              <span className='text-sm text-secondary'>{t.chatBotStatus}</span>
             </div>
 
-            {/* Messages Container */}
+            {/* Messages */}
             <div 
               ref={messagesEndRef}
               className="flex-1 p-4 flex flex-col gap-3 overflow-y-auto custom-scrollbar"
@@ -85,13 +101,13 @@ export default function ChatBot() {
               ))}
             </div>
 
-            {/* Input Box */}
+            {/* Input */}
             <div className="p-3 border-t border-accent/20 flex gap-2 bg-card/80">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask me anything..."
+                placeholder={t.chatBotPlaceholder}
                 className="flex-1 p-3 rounded-full bg-background border border-gray-700 focus:border-accent text-white outline-none text-sm shadow-inner shadow-black/20"
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               />
@@ -106,8 +122,8 @@ export default function ChatBot() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* Toggle Button (The main clickable element) */}
+
+      {/* Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 rounded-full bg-accent text-background font-bold text-xl flex items-center justify-center 
@@ -120,7 +136,6 @@ export default function ChatBot() {
             '🤖'
         )}
       </motion.button>
-
     </div>
   );
 }
