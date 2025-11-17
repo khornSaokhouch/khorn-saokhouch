@@ -2,10 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  experimental: {
-    appDir: true,
-  },
-
   images: {
     remotePatterns: [
       {
@@ -20,11 +16,7 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  // ✅ Add i18n config
-  i18n: {
-    locales: ['en', 'km'],   // English + Khmer
-    defaultLocale: 'en',
-  },
+  // ⚠ i18n removed: handle locales via folder structure in src/app/
 };
 
 module.exports = nextConfig;
