@@ -15,7 +15,7 @@ export const fontEn = localFont({
 export const fontKm = localFont({
   src: [
     {
-      path: '../../../public/fonts/KhmerOS_Siemreap.ttf', // Khmer font
+      path: '../../../public/fonts/KhmerOS_siemreap.ttf', // Khmer font
       weight: '400',
       style: 'normal',
     },
