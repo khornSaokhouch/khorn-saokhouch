@@ -7,15 +7,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      // Local fonts (English / Khmer)
       fontFamily: {
-        khmer: ['Battambang', 'sans-serif'], // custom class: font-khmer
+        en: ['var(--font-en)', 'sans-serif'], // English font
+        km: ['var(--font-km)', 'sans-serif'], // Khmer font
+        sans: ['Inter', 'sans-serif'],        // fallback
       },
+
+      // Colors
       colors: {
         background: "#0b1020",
         accent: "#00aaff",
-      },
-      fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        card: "#112240",
+        text: "#ccd6f6",
+        "text-secondary": "#8892b0",
       },
     },
   },

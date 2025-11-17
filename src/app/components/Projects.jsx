@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
+import { useLanguage } from '../context/LanguageContext';
 
 // JSON-like project data
 const projects = [
@@ -105,6 +106,8 @@ const headingVariants = {
 };
 
 export default function Projects() {
+  const { t } = useLanguage(); // <-- translation context
+
   return (
     <motion.section
       id="projects"
@@ -118,7 +121,7 @@ export default function Projects() {
         variants={headingVariants}
         className="text-3xl md:text-4xl font-bold mb-10 text-accent font-mono"
       >
-        Featured Projects
+        {t.projectsHeading} {/* <-- translated title */}
       </motion.h2>
 
       <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">

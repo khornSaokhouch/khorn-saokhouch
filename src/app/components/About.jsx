@@ -5,6 +5,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import myImage from '../../../public/assets/me.jpg';
+import { useLanguage } from '../context/LanguageContext';
+
 
 // Social Icons
 import { FaFacebookF, FaInstagram, FaGithub, FaTelegramPlane, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
@@ -45,6 +47,7 @@ const headingVariants = {
 };
 
 export default function About() {
+  const { t, lang } = useLanguage(); // <--- get translation
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -69,7 +72,7 @@ export default function About() {
           variants={headingVariants}
           className="text-3xl md:text-4xl font-bold mb-6 text-accent font-mono"
         >
-          <span className="text-accent/50"></span> About Me
+          {t.aboutHeading}
         </motion.h2>
 
         <motion.p
@@ -78,9 +81,7 @@ export default function About() {
           className="text-lg md:text-xl text-secondary bg-card/70 p-6 rounded-3xl 
                      backdrop-blur-lg border border-accent/20 leading-relaxed shadow-lg mb-8"
         >
-          I specialize in creating beautiful, responsive, and interactive web applications.  
-          My stack includes <strong>Next.js, Three.js, Framer Motion, and Tailwind CSS</strong>.  
-          I love building 3D-enhanced, animated, and high-performance user experiences.
+          {t.aboutDescription}
         </motion.p>
 
         {/* SOCIAL ICON SECTION */}
@@ -88,7 +89,7 @@ export default function About() {
           variants={itemVariants}
           className="p-4 rounded-2xl border border-accent/10 bg-card/50 shadow-md"
         >
-          <h3 className="text-xl font-semibold mb-4 text-white">Connect with me</h3>
+          <h3 className="text-xl font-semibold mb-4 text-white">{t.aboutConnect}</h3>
 
           <div className="flex flex-wrap gap-4 md:gap-5 items-center">
             {socialLinks.map((link, index) => (
@@ -120,7 +121,7 @@ export default function About() {
                         overflow-hidden bg-card/40 border border-accent/20 shadow-2xl">
           <Image
             src={myImage}
-            alt="Portfolio Image"
+            alt={t.aboutHeading} // localized alt text
             fill
             style={{ objectFit: 'cover' }}
             className="opacity-90 transition-all duration-700"

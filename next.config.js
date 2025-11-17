@@ -1,25 +1,30 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    experimental: {
-      appDir: true,
-    },
-    images: {
-      // Allow any external domain
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: '**',
-        },
-        {
-          protocol: 'http',
-          hostname: '**',
-        },
-      ],
-      // Optional: disable static image optimization for all images
-      unoptimized: true,
-    },
-  };
-  
-  module.exports = nextConfig;
-  
+  reactStrictMode: true,
+
+  experimental: {
+    appDir: true,
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+      },
+    ],
+    unoptimized: true,
+  },
+
+  // ✅ Add i18n config
+  i18n: {
+    locales: ['en', 'km'],   // English + Khmer
+    defaultLocale: 'en',
+  },
+};
+
+module.exports = nextConfig;

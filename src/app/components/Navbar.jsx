@@ -1,18 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, LayoutGroup } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const links = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'home' },
+  { id: 'about' },
+  { id: 'skills' },
+  { id: 'projects' },
+  { id: 'contact' },
 ];
 
 export default function Navbar() {
+  const { t } = useLanguage(); // <-- Using t from JSON
+
   const [hovered, setHovered] = useState(null);
-  const [activeId, setActiveId] = useState('home'); 
+  const [activeId, setActiveId] = useState('home');
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
@@ -24,14 +27,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
             setActiveId(entry.target.id);
           }
         });
       },
-      { rootMargin: '0px', threshold: 0.5 }
+      { threshold: 0.5 }
     );
 
     links.forEach(link => {
@@ -62,28 +65,33 @@ export default function Navbar() {
               onMouseEnter={() => setHovered(link.id)}
               onMouseLeave={() => setHovered(null)}
               className={`
-                relative 
-                px-4 py-2 min-w-[70px] min-h-[40px] text-base sm:text-sm md:text-sm 
-                md:px-4 md:py-2 rounded-full font-medium transition-colors duration-300 flex-shrink-0
+                relative px-4 py-2 min-w-[70px] min-h-[40px] text-base
+                sm:text-sm md:text-sm md:px-4 md:py-2 rounded-full 
+                font-medium transition-colors duration-300 flex-shrink-0
                 ${activeId === link.id ? 'text-white' : 'text-gray-400 hover:text-accent'}
               `}
             >
               {(hovered === link.id || activeId === link.id) && (
                 <motion.span
                   layoutId="activePill"
-                  className={`
-                    absolute inset-0 rounded-full z-0 
-                    ${activeId === link.id ? 'bg-accent/80' : 'bg-accent/30'}
-                  `}
-                  style={{ 
+                  className={`absolute inset-0 rounded-full z-0 ${
+                    activeId === link.id ? 'bg-accent/80' : 'bg-accent/30'
+                  }`}
+                  style={{
                     mixBlendMode: 'soft-light',
-                    boxShadow: activeId === link.id ? '0 0 8px #00b8ff, 0 0 15px #00b8ff' : 'none'
+                    boxShadow:
+                      activeId === link.id
+                        ? '0 0 8px #00b8ff, 0 0 15px #00b8ff'
+                        : 'none',
                   }}
                   transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                 />
               )}
-              
-              <span className="relative z-10 capitalize">{link.label}</span>
+
+              {/* 🔥 Auto translation from JSON */}
+              <span className="relative z-10 capitalize">
+                {t[link.id]}
+              </span>
             </motion.button>
           ))}
         </motion.nav>

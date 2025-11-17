@@ -1,23 +1,15 @@
-// src/app/components/sections/Skills.js
 'use client';
 import { motion } from 'framer-motion';
-import Hover3DCard from './Hover3DCard'; // Correct path assumed
+import Hover3DCard from './Hover3DCard';
+import { useLanguage } from '../context/LanguageContext';
 
 import { 
-  SiJavascript, 
-  SiTypescript, 
-  SiReact, 
-  SiNextdotjs, 
-  SiThreedotjs, // Note: Assuming this works for Three.js/WebGL context
-  SiTailwindcss, 
-  SiFigma, 
-  SiGit,
-  SiVercel,
-  SiNodedotjs, // Added Node.js icon for context
+  SiJavascript, SiTypescript, SiReact, SiNextdotjs, 
+  SiThreedotjs, SiTailwindcss, SiFigma, SiGit, 
+  SiVercel, SiNodedotjs 
 } from 'react-icons/si';
 
-
-// Categorized skills with inline list style
+// Categorized skills
 const categorizedSkills = [
   {
     category: 'Languages',
@@ -36,7 +28,7 @@ const categorizedSkills = [
       { name: 'React.js', icon: SiReact },
       { name: 'Next.js', icon: SiNextdotjs },
       { name: 'Three.js / R3F', icon: SiThreedotjs },
-      { name: 'Framer Motion', icon: null } // No dedicated icon needed
+      { name: 'Framer Motion', icon: null }
     ],
   },
   {
@@ -61,12 +53,13 @@ const categorizedSkills = [
   },
 ];
 
-// Animation variants (Kept the same)
+// Animation variants
 const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } };
 const categoryVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } };
 const headingVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } } };
 
 export default function Skills() {
+  const { t } = useLanguage();
   let skillIndexCounter = 0;
 
   return (
@@ -78,8 +71,11 @@ export default function Skills() {
       viewport={{ once: true, amount: 0.1 }}
       variants={containerVariants}
     >
-      <motion.h2 variants={headingVariants} className="text-3xl md:text-4xl font-bold mb-12 text-accent font-mono">
-        <span className="text-accent/50"></span> Skills
+      <motion.h2 
+        variants={headingVariants} 
+        className="text-3xl md:text-4xl font-bold mb-12 text-accent font-mono"
+      >
+        {t.skillsHeading}
       </motion.h2>
 
       <motion.div variants={containerVariants} className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-8">
@@ -90,18 +86,17 @@ export default function Skills() {
             className="bg-card/90 border border-accent/20 rounded-3xl p-6 shadow-2xl shadow-black/50 backdrop-blur-md"
           >
             <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 border-b border-accent/20 pb-2">
-              <span className="text-accent text-3xl">{section.icon}</span> {section.category}
+              <span className="text-accent text-3xl">{section.icon}</span> {t[section.category]}
             </h3>
 
-            {/* Inline List (Two Columns for better density) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {section.list.map((skill) => (
                 <Hover3DCard
                   key={skill.name}
                   IconComponent={skill.icon}
-                  name={skill.name} // Name passed as prop
+                  name={t[skill.name] || skill.name} // translation fallback
                   transitionDelay={0.03 * skillIndexCounter++}
-                  className="w-full" // Ensure card takes full column width
+                  className="w-full"
                 />
               ))}
             </div>
