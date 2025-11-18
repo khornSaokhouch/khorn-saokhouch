@@ -61,7 +61,7 @@ export default function CanvasScene() {
 
       <Suspense fallback={null}>
         <RotatingAbstractShape />
-        <Environment preset="night" />
+        {/* <Environment preset="night" /> */}
       </Suspense>
     </Canvas>
   );
