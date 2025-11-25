@@ -12,7 +12,6 @@ const projects = [
     TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
     Github: "",
     Team: ["Khorn saokhouch"]
-
   },
   {
     id: "8",
@@ -42,7 +41,7 @@ const projects = [
     ProjectLink: "https://www.servicemeite.io",
     TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
     Github: "https://github.com/kheangsenghorng/WCT-II-Service",
-    Team: ["Khorn saokhouch, Sen vibol", "Sam Nisa", "Kheng senhorng", "Chen SreyNeat"]
+    Team: ["Khorn saokhouch", "Sen vibol", "Sam Nisa", "Kheng senhorng", "Chen SreyNeat"]
   },
   {
     id: "2",
@@ -104,8 +103,15 @@ const projects = [
   }
 ];
 
-const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } };
-const headingVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } } };
+const containerVariants = { 
+  hidden: { opacity: 0 }, 
+  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } 
+};
+
+const headingVariants = { 
+  hidden: { opacity: 0, y: 30 }, 
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } } 
+};
 
 export default function Projects() {
   return (
