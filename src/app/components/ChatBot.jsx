@@ -1,19 +1,15 @@
-// src/app/components/ChatBot.js
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext'; // translation context
 
 export default function ChatBot() {
-  const { t, lang } = useLanguage(); // get translations and current language
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, sender: 'bot', text: t.chatBotGreeting } // use translation
+    { id: 1, sender: 'bot', text: 'Hello! How can I assist you today?' }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
 
-  // Scroll to bottom when messages update
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
@@ -26,27 +22,26 @@ export default function ChatBot() {
   Projects: Portfolio Website, E-commerce App, Blog Platform
   Contact: email@example.com, LinkedIn: linkedin.com/in/johndoe
   `;
-  
+
   const handleSend = async () => {
     if (!input.trim()) return;
-  
+
     const userMessage = input.trim();
     setMessages((prev) => [...prev, { id: Date.now(), sender: 'user', text: userMessage }]);
     setInput('');
-  
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: PERSONAL_INFO + '\n\nUser question: ' + userMessage,
-          lang,
         }),
       });
-  
+
       const data = await response.json();
       const botResponse = data.reply || "Sorry, I didn't understand that.";
-  
+
       setMessages((prev) => [
         ...prev,
         { id: Date.now() + 1, sender: 'bot', text: botResponse },
@@ -59,12 +54,10 @@ export default function ChatBot() {
       ]);
     }
   };
-  
-  
+
   return (
     <div className="relative flex flex-col items-end">
-      
-      {/* Chat Window */}
+
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -76,13 +69,11 @@ export default function ChatBot() {
                        border border-accent/20 rounded-3xl shadow-2xl shadow-black/70 
                        flex flex-col overflow-hidden h-[400px]"
           >
-            {/* Header */}
             <div className="bg-accent/10 px-4 py-3 text-white font-bold border-b border-accent/30 flex justify-between items-center">
-              <span className='text-accent'>{t.chatBotTitle}</span>
-              <span className='text-sm text-secondary'>{t.chatBotStatus}</span>
+              <span className='text-accent'>ChatBot</span>
+              <span className='text-sm text-secondary'>Online</span>
             </div>
 
-            {/* Messages */}
             <div 
               ref={messagesEndRef}
               className="flex-1 p-4 flex flex-col gap-3 overflow-y-auto custom-scrollbar"
@@ -101,13 +92,12 @@ export default function ChatBot() {
               ))}
             </div>
 
-            {/* Input */}
             <div className="p-3 border-t border-accent/20 flex gap-2 bg-card/80">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={t.chatBotPlaceholder}
+                placeholder="Type a message..."
                 className="flex-1 p-3 rounded-full bg-background border border-gray-700 focus:border-accent text-white outline-none text-sm shadow-inner shadow-black/20"
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               />
@@ -123,7 +113,6 @@ export default function ChatBot() {
         )}
       </AnimatePresence>
 
-      {/* Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 rounded-full bg-accent text-background font-bold text-xl flex items-center justify-center 

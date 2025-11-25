@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, LayoutGroup } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext';
 
 const links = [
   { id: 'home' },
@@ -12,7 +11,6 @@ const links = [
 ];
 
 export default function Navbar() {
-  const { t } = useLanguage(); 
   const [hovered, setHovered] = useState(null);
   const [activeId, setActiveId] = useState('home');
 
@@ -51,11 +49,7 @@ export default function Navbar() {
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 100, delay: 0.2 }}
-          className="
-            bg-card/50 border border-accent/20 backdrop-blur-xl 
-            rounded-full p-2 flex gap-2 shadow-2xl 
-            tracking-wider max-w-full overflow-x-auto
-          "
+          className="bg-card/50 border border-accent/20 backdrop-blur-xl rounded-full p-2 flex gap-2 shadow-2xl tracking-wider max-w-full overflow-x-auto"
         >
           {links.map((link) => (
             <motion.button
@@ -63,12 +57,7 @@ export default function Navbar() {
               onClick={() => scrollToSection(link.id)}
               onMouseEnter={() => setHovered(link.id)}
               onMouseLeave={() => setHovered(null)}
-              className={`
-                relative px-4 py-2 min-w-[70px] min-h-[40px] text-base
-                sm:text-sm md:text-sm md:px-4 md:py-2 rounded-full 
-                font-medium transition-colors duration-300 flex-shrink-0
-                ${activeId === link.id ? 'text-white' : 'text-gray-400 hover:text-accent'}
-              `}
+              className={`relative px-4 py-2 min-w-[70px] min-h-[40px] text-base sm:text-sm md:text-sm md:px-4 md:py-2 rounded-full font-medium transition-colors duration-300 flex-shrink-0 ${activeId === link.id ? 'text-white' : 'text-gray-400 hover:text-accent'}`}
             >
               {(hovered === link.id || activeId === link.id) && (
                 <motion.span
@@ -82,9 +71,7 @@ export default function Navbar() {
                 />
               )}
 
-              <span className="relative z-10 capitalize">
-                {t[link.id]}
-              </span>
+              <span className="relative z-10 capitalize">{link.id}</span>
             </motion.button>
           ))}
         </motion.nav>

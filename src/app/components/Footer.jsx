@@ -1,17 +1,15 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useLanguage } from '../context/LanguageContext';
 
 const SignatureInitial = () => (
   <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-lg border border-accent/50">K</div>
 );
 
 export default function Footer() {
-  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   const handleBackToTop = () => {
-    document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -30,7 +28,7 @@ export default function Footer() {
           {/* Left: Branding */}
           <div className="flex items-center justify-center md:justify-start gap-4 mb-4 md:mb-0">
             <SignatureInitial />
-            <p className="text-lg text-white font-bold">{t.heroName}</p>
+            <p className="text-lg text-white font-bold">Khorn Saokhouch</p>
           </div>
 
           {/* Right: Back to Top */}
@@ -41,19 +39,19 @@ export default function Footer() {
             whileTap={{ scale: 0.95 }}
           >
             <span className="mr-2 transition-transform duration-300 group-hover:-translate-y-1">↑</span>
-            {t.footerBackToTop}
+            Back to Top
           </motion.button>
         </div>
 
         {/* Copyright / Tech Info */}
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-  <p className="text-sm text-secondary font-mono mb-2 md:mb-0">
-    &copy; {year} {t.footerCopyright}
-  </p>
-  <p className="text-sm text-secondary font-mono">
-    {t.footerTechInfo}
-  </p>
-</div>
+          <p className="text-sm text-secondary font-mono mb-2 md:mb-0">
+            &copy; {year} Khorn Saokhouch. All rights reserved.
+          </p>
+          <p className="text-sm text-secondary font-mono">
+            Built with Next.js, React, Tailwind CSS & Framer Motion
+          </p>
+        </div>
 
       </div>
     </motion.footer>

@@ -1,10 +1,19 @@
 'use client';
 import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
-import { useLanguage } from '../context/LanguageContext';
 
-// JSON-like project data
 const projects = [
+  {
+    id: "10",
+    Img: "/projects/project10.png",
+    Title: "Shopping Store Website",
+    Description: "This website built using Vue js for frontend and backend using Python, Database using Mysql.",
+    ProjectLink: "https://food-delivery-website.vercel.app",
+    TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
+    Github: "",
+    Team: ["Khorn saokhouch"]
+
+  },
   {
     id: "8",
     Img: "/projects/project8.png",
@@ -13,7 +22,7 @@ const projects = [
     ProjectLink: "https://frontend-e.onrender.com",
     TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
     Github: "https://github.com/khornSaokhouch/frontend_e",
-    Team: ["Khorn saokhouch, Sen vibol", "Sam Nisa"]
+    Team: ["Khorn saokhouch"]
   },
   {
     id: "9",
@@ -95,19 +104,10 @@ const projects = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
-};
-
-const headingVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } },
-};
+const containerVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } };
+const headingVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } } };
 
 export default function Projects() {
-  const { t } = useLanguage(); // <-- translation context
-
   return (
     <motion.section
       id="projects"
@@ -121,7 +121,7 @@ export default function Projects() {
         variants={headingVariants}
         className="text-3xl md:text-4xl font-bold mb-10 text-accent font-mono"
       >
-        {t.projectsHeading} {/* <-- translated title */}
+        My Projects
       </motion.h2>
 
       <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
