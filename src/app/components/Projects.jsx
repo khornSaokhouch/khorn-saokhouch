@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import ProjectCard from './ProjectCard';
 
+// ... (Keep your existing 'projects' array data here unchanged) ...
 const projects = [
   {
     id: "10",
@@ -105,41 +106,49 @@ const projects = [
 
 const containerVariants = { 
   hidden: { opacity: 0 }, 
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } } 
+  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } } 
 };
 
 const headingVariants = { 
   hidden: { opacity: 0, y: 30 }, 
-  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 150 } } 
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100 } } 
 };
 
 export default function Projects() {
   return (
-    <motion.section
-      id="projects"
-      className="min-h-screen px-4 sm:px-8 md:px-20 lg:px-40 py-16 sm:py-24 flex flex-col justify-center bg-background"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={containerVariants}
-    >
-      <motion.h2
-        variants={headingVariants}
-        className="text-3xl md:text-4xl font-bold mb-10 text-accent font-mono"
+    <section id="projects" className="bg-background py-16 sm:py-24">
+      <motion.div
+        className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={containerVariants}
       >
-        My Projects
-      </motion.h2>
+        <motion.div variants={headingVariants} className="mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-accent font-mono mb-4">
+            My Projects
+          </h2>
+          <div className="h-1 w-20 bg-accent rounded-full"/>
+        </motion.div>
 
-      <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            index={index}
-            transitionDelay={index * 0.1}
-          />
-        ))}
+        {/* 
+           Grid Responsive Logic:
+           - default (mobile): 1 column
+           - md (tablet/small laptop): 2 columns
+           - xl (large desktop): 3 columns 
+           This prevents squashed cards on 1024px screens
+        */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              transitionDelay={index * 0.05}
+            />
+          ))}
+        </motion.div>
       </motion.div>
-    </motion.section>
+    </section>
   );
 }
