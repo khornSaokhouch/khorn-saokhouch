@@ -1,11 +1,12 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import PERSONAL_INFO from '../imformation/personalInfo'; // import your info
 
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, sender: 'bot', text: 'Hello! How can I assist you today?' }
+    { id: 1, sender: 'bot', text: 'Hello! I am your personal assistant. Ask me anything about my work, projects, or skills!' }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
@@ -15,13 +16,6 @@ export default function ChatBot() {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
   }, [messages]);
-
-  const PERSONAL_INFO = `
-  Name: John Doe
-  Skills: React, Next.js, Tailwind, Node.js
-  Projects: Portfolio Website, E-commerce App, Blog Platform
-  Contact: email@example.com, LinkedIn: linkedin.com/in/johndoe
-  `;
 
   const handleSend = async () => {
     if (!input.trim()) return;
@@ -35,7 +29,7 @@ export default function ChatBot() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-          message: PERSONAL_INFO + '\n\nUser question: ' + userMessage,
+          message: `${PERSONAL_INFO}\n\nUser question: ${userMessage}`,
         }),
       });
 

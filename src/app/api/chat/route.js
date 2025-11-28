@@ -1,13 +1,22 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
-  const { message, lang } = await req.json();
+  const { message } = await req.json();
 
   if (!message) {
     return NextResponse.json({ reply: 'Message is required' }, { status: 400 });
   }
 
   try {
+    // Add explicit instructions for the AI
+    const prompt = `
+You are a personal assistant for Khorn Saokhouch. 
+Only answer questions based on the following information. 
+If a question is unrelated, reply: "Sorry, I can only answer questions about Khorn Saokhouch."
+
+${message}
+`;
+
     const response = await fetch(
       'https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText',
       {
@@ -17,7 +26,7 @@ export async function POST(req) {
           'Authorization': `Bearer ${process.env.GOOGLE_API_KEY}`,
         },
         body: JSON.stringify({
-          prompt: message,
+          prompt: prompt,
           temperature: 0.7,
           maxOutputTokens: 300,
         }),
