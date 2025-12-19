@@ -5,12 +5,22 @@ import ProjectCard from './ProjectCard';
 // ... (Keep your existing 'projects' array data here unchanged) ...
 const projects = [
   {
+    id: "11",
+    Img: "/projects/project11.png",
+    Title: "Food Delivery Website",
+    Description: "This website built using Angular for frontend ",
+    ProjectLink: "https://food-shop-frontend.vercel.app/",
+    TechStack: ["Angular", "tailwindcss"],
+    Github: "https://github.com/khornSaokhouch/food-shop-frontend",
+    Team: ["Khorn saokhouch"]
+  },
+  {
     id: "10",
     Img: "/projects/project10.png",
     Title: "Shopping Store Website",
     Description: "This website built using Vue js for frontend and backend using Python, Database using Mysql.",
     ProjectLink: "https://food-delivery-website.vercel.app",
-    TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
+    TechStack: ["Vue js", "Laravel", "Mysql", "tailwindcss"],
     Github: "",
     Team: ["Khorn saokhouch"]
   },
@@ -32,6 +42,16 @@ const projects = [
     ProjectLink: "https://coffee-web-app-gamma.vercel.app",
     TechStack: ["Next js", "Laravel", "Mysql", "tailwindcss"],
     Github: "https://github.com/khornSaokhouch/Coffee-web-app",
+    Team: ["Khorn saokhouch"]
+  },
+  {
+    id: "12",	
+    Img: "/projects/project12.png",
+    Title: "CINEHUB MOveie Website",
+    Description: "This website built using Next js for frontend and Fetch data from api TMBD.",
+    ProjectLink: "https://cinehub-sepia.vercel.app/",
+    TechStack: ["Next js", "TMDB api", "tailwindcss"],
+    Github: "https://github.com/khornSaokhouch/cinehub",
     Team: ["Khorn saokhouch"]
   },
   {
